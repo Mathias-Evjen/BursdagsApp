@@ -16,7 +16,12 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.core.content.ContextCompat
+import androidx.room.Room
+import com.example.bursdagsapp.data.AppDatabase
+import com.example.bursdagsapp.repositories.FriendRepository
+import com.example.bursdagsapp.ui.screens.BirthdayApp
 import com.example.bursdagsapp.ui.theme.BursdagsAppTheme
+import com.example.bursdagsapp.ui.viewmodels.FriendViewModel
 
 class MainActivity : ComponentActivity() {
 
@@ -43,13 +48,20 @@ class MainActivity : ComponentActivity() {
         }
 
         enableEdgeToEdge()
+
+        val db = Room.databaseBuilder(
+            applicationContext,
+            AppDatabase::class.java,
+            "friend_db"
+        ).build()
+
+        val repository = FriendRepository(db.friendDao())
+        val viewModel = FriendViewModel(repository, application)
+
         setContent {
             BursdagsAppTheme {
                 Scaffold(modifier = Modifier.fillMaxSize()) { innerPadding ->
-                    Greeting(
-                        name = "Android",
-                        modifier = Modifier.padding(innerPadding)
-                    )
+                    BirthdayApp(modifier = Modifier.padding(innerPadding), viewModel)
                 }
             }
         }

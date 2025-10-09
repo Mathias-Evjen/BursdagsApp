@@ -15,7 +15,7 @@ import com.example.bursdagsapp.data.Friend
 import com.example.bursdagsapp.ui.theme.BursdagsAppTheme
 
 @Composable
-fun VennCard(
+fun FriendCard(
     modifier: Modifier = Modifier,
     friend: Friend
 ) {
@@ -26,20 +26,20 @@ fun VennCard(
             modifier = Modifier
                 .fillMaxWidth()
                 .padding(24.dp),
-            horizontalArrangement = Arrangement.SpaceAround
+            horizontalArrangement = Arrangement.SpaceBetween
         ) {
-            Text(text = friend.name, style = MaterialTheme.typography.titleLarge)
-            Text(text = "" + friend.birthDay + "/" + friend.birthMonth, style = MaterialTheme.typography.titleLarge)
+            Text(text = friend.name, style = MaterialTheme.typography.displaySmall)
+            Text(text = "" + friend.birthDay + "/" + friend.birthMonth, style = MaterialTheme.typography.displaySmall)
         }
     }
 }
 
 @Preview
 @Composable
-fun VennCardPreview() {
+fun VennFriendPreview() {
     val friend = Friend(name = "Mathias", phoneNumber = "92858252", birthMonth = 5, birthDay = 14)
 
     BursdagsAppTheme {
-        VennCard(friend = friend)
+        FriendCard(friend = friend)
     }
 }
