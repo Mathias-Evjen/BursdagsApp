@@ -10,22 +10,31 @@ import androidx.activity.enableEdgeToEdge
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
+import androidx.compose.material3.BottomAppBar
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Scaffold
+import androidx.compose.material3.SingleChoiceSegmentedButtonRow
 import androidx.compose.material3.Text
 import androidx.compose.material3.TopAppBar
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableIntStateOf
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.core.content.ContextCompat
 import androidx.room.Room
 import com.example.bursdagsapp.data.AppDatabase
 import com.example.bursdagsapp.repositories.FriendRepository
-import com.example.bursdagsapp.ui.screens.BirthdayApp
+import com.example.bursdagsapp.BirthdayApp
 import com.example.bursdagsapp.ui.theme.BursdagsAppTheme
 import com.example.bursdagsapp.ui.viewmodels.FriendViewModel
 
 class MainActivity : ComponentActivity() {
+
+    private val myApp by lazy { application as MyApp }
 
     private val beOmSmsTillatelse = registerForActivityResult(
         ActivityResultContracts.RequestPermission()
@@ -33,12 +42,13 @@ class MainActivity : ComponentActivity() {
         isGranted: Boolean ->
             if (isGranted) {
                 Log.d("SMS", "Tillatelse til å sende SMS")
+                myApp.scheduleDailyWork(this)
             } else {
                 Log.d("SMS", "Ikke tillatelse til å sende SMS")
+                myApp.cancelDailyWork(this)
             }
     }
 
-    @OptIn(ExperimentalMaterial3Api::class)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
@@ -46,6 +56,7 @@ class MainActivity : ComponentActivity() {
                 Manifest.permission.SEND_SMS) == PackageManager.PERMISSION_GRANTED
         ) {
             Log.d("SMS", "Tillatelse til å sende SMS")
+            myApp.scheduleDailyWork(this)
         } else {
             beOmSmsTillatelse.launch(Manifest.permission.SEND_SMS)
         }
@@ -64,33 +75,11 @@ class MainActivity : ComponentActivity() {
         setContent {
             BursdagsAppTheme {
                 Scaffold(
-                    modifier = Modifier.fillMaxSize(),
-                    topBar = {
-                        TopAppBar(
-                            title = {
-                                Text("BursdagsApp")
-                            }
-                        ) },
+
                 ) { innerPadding ->
-                    BirthdayApp(modifier = Modifier.padding(innerPadding), viewModel)
+                    BirthdayApp(modifier = Modifier.padding(innerPadding), viewModel = viewModel)
                 }
             }
         }
-    }
-}
-
-@Composable
-fun Greeting(name: String, modifier: Modifier = Modifier) {
-    Text(
-        text = "Hello $name!",
-        modifier = modifier
-    )
-}
-
-@Preview(showBackground = true)
-@Composable
-fun GreetingPreview() {
-    BursdagsAppTheme {
-        Greeting("Android")
     }
 }

@@ -9,5 +9,6 @@ data class Friend (
     val name: String,
     val phoneNumber: String,
     val birthMonth: Int,
-    val birthDay: Int
+    val birthDay: Int,
+    val message: String = "Happy birthday!"
     )
