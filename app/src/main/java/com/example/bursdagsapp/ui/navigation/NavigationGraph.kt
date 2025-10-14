@@ -1,5 +1,7 @@
 package com.example.bursdagsapp.ui.navigation
 
+import androidx.compose.animation.slideInHorizontally
+import androidx.compose.animation.slideOutHorizontally
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
@@ -25,7 +27,13 @@ fun NavigationGraph(
     val friends by viewModel.friends.collectAsState()
 
     NavHost(navController = navController, startDestination = "list", modifier = modifier) {
-        composable("list") {
+        composable(
+            "list",
+            enterTransition = { slideInHorizontally(initialOffsetX = { 1000 }) },
+            exitTransition = { slideOutHorizontally(targetOffsetX  = { -1000 }) },
+            popEnterTransition = { slideInHorizontally(initialOffsetX = { -1000 }) },
+            popExitTransition = { slideOutHorizontally(targetOffsetX = { 1000 }) }
+        ) {
             ListScreen(
                 friends,
                 onFriendClick = {friend ->
@@ -45,13 +53,24 @@ fun NavigationGraph(
             }
         }
 
-        composable("add_friend") {
+        composable(
+            "add_friend",
+            enterTransition = { slideInHorizontally(initialOffsetX = { 1000 }) },
+            exitTransition = { slideOutHorizontally(targetOffsetX  = { -1000 }) },
+            popEnterTransition = { slideInHorizontally(initialOffsetX = { -1000 }) },
+            popExitTransition = { slideOutHorizontally(targetOffsetX = { 1000 }) }
+        ) {
             AddFriendScreen()
         }
 
-        composable("prefs") {
+        composable(
+            "prefs",
+            enterTransition = { slideInHorizontally(initialOffsetX = { 1000 }) },
+            exitTransition = { slideOutHorizontally(targetOffsetX  = { -1000 }) },
+            popEnterTransition = { slideInHorizontally(initialOffsetX = { -1000 }) },
+            popExitTransition = { slideOutHorizontally(targetOffsetX = { 1000 }) }
+        ) {
             PreferencesScreen()
         }
     }
-
 }
