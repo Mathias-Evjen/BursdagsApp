@@ -7,6 +7,8 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.text.KeyboardActions
+import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.DateRange
 import androidx.compose.material3.Button
@@ -19,12 +21,14 @@ import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.Text
 import androidx.compose.material3.rememberDatePickerState
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavHostController
 import com.example.bursdagsapp.ui.viewmodels.FriendViewModel
@@ -38,14 +42,22 @@ fun AddFriendScreen(
     viewModel: FriendViewModel,
     navController: NavHostController
 ) {
+
+    val uiState by viewModel.uiState.collectAsState()
+
     var name by remember { mutableStateOf("") }
+    var isNameEmpty by remember { mutableStateOf(false) }
+
     var phoneNumber by remember { mutableStateOf("") }
+    var isPhoneNumberEmpty by remember { mutableStateOf(false) }
+
     var birthdayMessage by remember { mutableStateOf("") }
 
     var showDatePicker by remember { mutableStateOf(false) }
 
     val datePickerState = rememberDatePickerState()
     val selectedDate = datePickerState.selectedDateMillis
+    var isSelectedDateEmpty by remember { mutableStateOf(false) }
 
     Column(
         modifier = Modifier
@@ -100,7 +112,23 @@ fun AddFriendScreen(
             onValueChange = { birthdayMessage = it },
             label = { Text("Birthday message")},
             singleLine = false,
-            modifier = Modifier.fillMaxWidth()
+            modifier = Modifier.fillMaxWidth(),
+            keyboardOptions = KeyboardOptions.Default.copy(
+                imeAction = ImeAction.Done
+            ),
+            keyboardActions = KeyboardActions(
+                onDone = {
+                    if (name.isNotBlank() && phoneNumber.isNotBlank() && selectedDate != null) {
+                        viewModel.addFriend(
+                            name = name,
+                            phoneNumber = phoneNumber,
+                            birthday = selectedDate,
+                            message = birthdayMessage
+                        )
+
+                        if (!uiState.isNameEmpty && !uiState.isPhoneNumberEmpty && !uiState.isBirthdayEmpty) navController.navigateUp() }
+                    }
+            )
         )
 
         Button(
@@ -112,7 +140,7 @@ fun AddFriendScreen(
                     message = birthdayMessage
                 )
 
-                navController.navigateUp()
+                if (!uiState.isNameEmpty && !uiState.isPhoneNumberEmpty && !uiState.isBirthdayEmpty) navController.navigateUp()
             },
             enabled = name.isNotBlank() && phoneNumber.isNotBlank() && selectedDate != null,
             modifier = Modifier.fillMaxWidth()

@@ -45,7 +45,7 @@ fun NavigationGraph(
             val friendId = backStackEntry.arguments?.getInt("friendId")
             val friend = friends.find { it.id == friendId }
             friend?.let {
-                FriendDetailScreen(it)
+                FriendDetailScreen(it, viewModel, navController)
             }
         }
 

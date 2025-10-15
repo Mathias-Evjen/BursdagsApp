@@ -10,4 +10,8 @@ class FriendRepository(private val dao: FriendDao) {
     suspend fun insert(friend: Friend) {
         dao.insert(friend)
     }
+
+    suspend fun delete(friend: Friend) {
+        dao.delete(friend)
+    }
 }
