@@ -19,29 +19,29 @@ fun ListScreen(
 ) {
 
 
-    val mockFriends = listOf(
-        Friend(name = "Jonas", phoneNumber = "12345678", birthMonth = 8, birthDay = 29),
-        Friend(name = "Thomas", phoneNumber = "87654321", birthMonth = 10, birthDay = 8),
-        Friend(name = "Mathias", phoneNumber = "92858252", birthMonth = 5, birthDay = 14),
-        Friend(name = "Jonas", phoneNumber = "12345678", birthMonth = 8, birthDay = 29),
-        Friend(name = "Thomas", phoneNumber = "87654321", birthMonth = 10, birthDay = 8),
-        Friend(name = "Mathias", phoneNumber = "92858252", birthMonth = 5, birthDay = 14),
-        Friend(name = "Jonas", phoneNumber = "12345678", birthMonth = 8, birthDay = 29),
-        Friend(name = "Thomas", phoneNumber = "87654321", birthMonth = 10, birthDay = 8),
-        Friend(name = "Mathias", phoneNumber = "92858252", birthMonth = 5, birthDay = 14),
-        Friend(name = "Jonas", phoneNumber = "12345678", birthMonth = 8, birthDay = 29),
-        Friend(name = "Thomas", phoneNumber = "87654321", birthMonth = 10, birthDay = 8),
-        Friend(name = "Mathias", phoneNumber = "92858252", birthMonth = 5, birthDay = 14),
-        Friend(name = "Jonas", phoneNumber = "12345678", birthMonth = 8, birthDay = 29),
-        Friend(name = "Thomas", phoneNumber = "87654321", birthMonth = 10, birthDay = 8),
-        Friend(name = "Mathias", phoneNumber = "92858252", birthMonth = 5, birthDay = 14),
-        Friend(name = "Jonas", phoneNumber = "12345678", birthMonth = 8, birthDay = 29),
-        Friend(name = "Thomas", phoneNumber = "87654321", birthMonth = 10, birthDay = 8),
-        Friend(name = "Mathias", phoneNumber = "92858252", birthMonth = 5, birthDay = 14),
-        Friend(name = "Jonas", phoneNumber = "12345678", birthMonth = 8, birthDay = 29),
-        Friend(name = "Thomas", phoneNumber = "87654321", birthMonth = 10, birthDay = 8),
-        Friend(name = "Mathias", phoneNumber = "92858252", birthMonth = 5, birthDay = 14),
-    )
+//    val mockFriends = listOf(
+//        Friend(name = "Jonas", phoneNumber = "12345678", birthMonth = 8, birthDay = 29),
+//        Friend(name = "Thomas", phoneNumber = "87654321", birthMonth = 10, birthDay = 8),
+//        Friend(name = "Mathias", phoneNumber = "92858252", birthMonth = 5, birthDay = 14),
+//        Friend(name = "Jonas", phoneNumber = "12345678", birthMonth = 8, birthDay = 29),
+//        Friend(name = "Thomas", phoneNumber = "87654321", birthMonth = 10, birthDay = 8),
+//        Friend(name = "Mathias", phoneNumber = "92858252", birthMonth = 5, birthDay = 14),
+//        Friend(name = "Jonas", phoneNumber = "12345678", birthMonth = 8, birthDay = 29),
+//        Friend(name = "Thomas", phoneNumber = "87654321", birthMonth = 10, birthDay = 8),
+//        Friend(name = "Mathias", phoneNumber = "92858252", birthMonth = 5, birthDay = 14),
+//        Friend(name = "Jonas", phoneNumber = "12345678", birthMonth = 8, birthDay = 29),
+//        Friend(name = "Thomas", phoneNumber = "87654321", birthMonth = 10, birthDay = 8),
+//        Friend(name = "Mathias", phoneNumber = "92858252", birthMonth = 5, birthDay = 14),
+//        Friend(name = "Jonas", phoneNumber = "12345678", birthMonth = 8, birthDay = 29),
+//        Friend(name = "Thomas", phoneNumber = "87654321", birthMonth = 10, birthDay = 8),
+//        Friend(name = "Mathias", phoneNumber = "92858252", birthMonth = 5, birthDay = 14),
+//        Friend(name = "Jonas", phoneNumber = "12345678", birthMonth = 8, birthDay = 29),
+//        Friend(name = "Thomas", phoneNumber = "87654321", birthMonth = 10, birthDay = 8),
+//        Friend(name = "Mathias", phoneNumber = "92858252", birthMonth = 5, birthDay = 14),
+//        Friend(name = "Jonas", phoneNumber = "12345678", birthMonth = 8, birthDay = 29),
+//        Friend(name = "Thomas", phoneNumber = "87654321", birthMonth = 10, birthDay = 8),
+//        Friend(name = "Mathias", phoneNumber = "92858252", birthMonth = 5, birthDay = 14),
+//    )
 
     val headerPadding = 24
     val listItemPadding = 16
@@ -59,7 +59,7 @@ fun ListScreen(
         LazyColumn(
             modifier = Modifier
         ) {
-            items(mockFriends) { friend ->
+            items(friends) { friend ->
                 FriendCard(friend = friend, padding = listItemPadding, onFriendClick = { onFriendClick(friend) })
             }
         }

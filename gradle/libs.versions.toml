@@ -12,6 +12,7 @@ navigationCompose = "2.9.5"
 roomGradlePlugin = "2.8.2"
 workRuntimeKtx = "2.10.5"
 material = "1.13.0"
+composeMaterial3 = "1.5.3"
 
 [libraries]
 androidx-core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "coreKtx" }

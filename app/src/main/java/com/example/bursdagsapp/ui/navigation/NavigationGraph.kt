@@ -28,11 +28,7 @@ fun NavigationGraph(
 
     NavHost(navController = navController, startDestination = "list", modifier = modifier) {
         composable(
-            "list",
-            enterTransition = { slideInHorizontally(initialOffsetX = { 1000 }) },
-            exitTransition = { slideOutHorizontally(targetOffsetX  = { -1000 }) },
-            popEnterTransition = { slideInHorizontally(initialOffsetX = { -1000 }) },
-            popExitTransition = { slideOutHorizontally(targetOffsetX = { 1000 }) }
+            "list"
         ) {
             ListScreen(
                 friends,
@@ -54,21 +50,16 @@ fun NavigationGraph(
         }
 
         composable(
-            "add_friend",
-            enterTransition = { slideInHorizontally(initialOffsetX = { 1000 }) },
-            exitTransition = { slideOutHorizontally(targetOffsetX  = { -1000 }) },
-            popEnterTransition = { slideInHorizontally(initialOffsetX = { -1000 }) },
-            popExitTransition = { slideOutHorizontally(targetOffsetX = { 1000 }) }
+            "add_friend"
         ) {
-            AddFriendScreen()
+            AddFriendScreen(
+                viewModel = viewModel,
+                navController = navController
+            )
         }
 
         composable(
-            "prefs",
-            enterTransition = { slideInHorizontally(initialOffsetX = { 1000 }) },
-            exitTransition = { slideOutHorizontally(targetOffsetX  = { -1000 }) },
-            popEnterTransition = { slideInHorizontally(initialOffsetX = { -1000 }) },
-            popExitTransition = { slideOutHorizontally(targetOffsetX = { 1000 }) }
+            "prefs"
         ) {
             PreferencesScreen()
         }
