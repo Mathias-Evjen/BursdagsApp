@@ -29,6 +29,7 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.input.ImeAction
+import androidx.compose.ui.text.input.KeyboardCapitalization
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavHostController
 import com.example.bursdagsapp.ui.viewmodels.FriendViewModel
@@ -73,14 +74,21 @@ fun AddFriendScreen(
             onValueChange = { name = it },
             label = { Text("Name") },
             singleLine = true,
-            modifier = Modifier.fillMaxWidth()
+            modifier = Modifier.fillMaxWidth(),
+            keyboardOptions = KeyboardOptions(
+                capitalization = KeyboardCapitalization.Sentences
+            )
+
         )
         OutlinedTextField(
             value = phoneNumber,
             onValueChange = { phoneNumber = it},
             label = { Text("Phone number") },
             singleLine = true,
-            modifier = Modifier.fillMaxWidth()
+            modifier = Modifier.fillMaxWidth(),
+            keyboardOptions = KeyboardOptions(
+                capitalization = KeyboardCapitalization.Sentences
+            )
         )
 
         Box{
@@ -128,6 +136,9 @@ fun AddFriendScreen(
 
                         if (!uiState.isNameEmpty && !uiState.isPhoneNumberEmpty && !uiState.isBirthdayEmpty) navController.navigateUp() }
                     }
+            ),
+            keyboardOptions = KeyboardOptions(
+                capitalization = KeyboardCapitalization.Sentences
             )
         )
 

@@ -1,9 +1,12 @@
 package com.example.bursdagsapp.ui.screens
 
+import androidx.compose.foundation.background
+import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
@@ -14,6 +17,7 @@ import androidx.compose.material.icons.filled.Person
 import androidx.compose.material.icons.filled.Search
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.SearchBar
@@ -46,36 +50,8 @@ fun ListScreen(
     friends: List<Friend>,
     onFriendClick: (Friend) -> Unit
 ) {
-
-
-//    val mockFriends = listOf(
-//        Friend(name = "Jonas", phoneNumber = "12345678", birthMonth = 8, birthDay = 29),
-//        Friend(name = "Thomas", phoneNumber = "87654321", birthMonth = 10, birthDay = 8),
-//        Friend(name = "Mathias", phoneNumber = "92858252", birthMonth = 5, birthDay = 14),
-//        Friend(name = "Jonas", phoneNumber = "12345678", birthMonth = 8, birthDay = 29),
-//        Friend(name = "Thomas", phoneNumber = "87654321", birthMonth = 10, birthDay = 8),
-//        Friend(name = "Mathias", phoneNumber = "92858252", birthMonth = 5, birthDay = 14),
-//        Friend(name = "Jonas", phoneNumber = "12345678", birthMonth = 8, birthDay = 29),
-//        Friend(name = "Thomas", phoneNumber = "87654321", birthMonth = 10, birthDay = 8),
-//        Friend(name = "Mathias", phoneNumber = "92858252", birthMonth = 5, birthDay = 14),
-//        Friend(name = "Jonas", phoneNumber = "12345678", birthMonth = 8, birthDay = 29),
-//        Friend(name = "Thomas", phoneNumber = "87654321", birthMonth = 10, birthDay = 8),
-//        Friend(name = "Mathias", phoneNumber = "92858252", birthMonth = 5, birthDay = 14),
-//        Friend(name = "Jonas", phoneNumber = "12345678", birthMonth = 8, birthDay = 29),
-//        Friend(name = "Thomas", phoneNumber = "87654321", birthMonth = 10, birthDay = 8),
-//        Friend(name = "Mathias", phoneNumber = "92858252", birthMonth = 5, birthDay = 14),
-//        Friend(name = "Jonas", phoneNumber = "12345678", birthMonth = 8, birthDay = 29),
-//        Friend(name = "Thomas", phoneNumber = "87654321", birthMonth = 10, birthDay = 8),
-//        Friend(name = "Mathias", phoneNumber = "92858252", birthMonth = 5, birthDay = 14),
-//        Friend(name = "Jonas", phoneNumber = "12345678", birthMonth = 8, birthDay = 29),
-//        Friend(name = "Thomas", phoneNumber = "87654321", birthMonth = 10, birthDay = 8),
-//        Friend(name = "Mathias", phoneNumber = "92858252", birthMonth = 5, birthDay = 14),
-//    )
-
-    val headerPadding = 24
     val listItemPadding = 16
 
-    var expanded by rememberSaveable { mutableStateOf(false)}
     var searchText by remember { mutableStateOf("") }
 
     val filteredFriends = if (searchText.isBlank()) {
@@ -88,18 +64,12 @@ fun ListScreen(
     Column(
         modifier = Modifier
     ) {
-        FriendCard(
-            personIcon = Icons.Default.Person,
-            personIconDesc = "Person",
-            cakeIcon = painterResource(R.drawable.cake),
-            cakeIconDesc = "Birthday cake",
-            padding = headerPadding
-        )
+        ListTopBanner()
 
         TextField(
             value = searchText,
             onValueChange = { searchText = it },
-            modifier = Modifier.fillMaxWidth().padding(bottom = 4.dp, start = 4.dp, end = 4.dp),
+            modifier = Modifier.fillMaxWidth().padding(4.dp),
             shape = RoundedCornerShape(32.dp),
             placeholder = { Text("Search for a friend") },
             leadingIcon = {
@@ -123,5 +93,40 @@ fun ListScreen(
                 FriendCard(friend = friend, padding = listItemPadding, onFriendClick = { onFriendClick(friend) })
             }
         }
+    }
+}
+
+@Composable
+fun ListTopBanner() {
+    Box(
+        modifier = Modifier
+            .fillMaxWidth()
+            .background(color = MaterialTheme.colorScheme.primary)
+    ) {
+        Row(
+            modifier = Modifier
+                .fillMaxWidth()
+                .padding(16.dp),
+            horizontalArrangement = Arrangement.SpaceBetween,
+            verticalAlignment = Alignment.CenterVertically
+        ) {
+            Box(
+                modifier = Modifier.weight(1f),
+                contentAlignment = Alignment.CenterStart
+            ) {
+                Icon(Icons.Default.Person,
+                    contentDescription = "Person icon")
+            }
+            Box(
+                modifier = Modifier.weight(1f),
+                contentAlignment = Alignment.Center
+            ) {
+                Icon(painter = painterResource(R.drawable.cake),
+                    contentDescription = "Birthday cake")
+            }
+
+            Box(modifier = Modifier.weight(0.5f))
+        }
+
     }
 }

@@ -39,12 +39,7 @@ import com.example.bursdagsapp.ui.theme.BursdagsAppTheme
 @Composable
 fun FriendCard(
     modifier: Modifier = Modifier,
-    friend: Friend? = null,
-    personIcon: ImageVector? = null,
-    personIconDesc: String? = null,
-    cakeIcon: Painter? = null,
-    cakeIconDesc: String? = null,
-
+    friend: Friend,
     padding: Int,
 
     onFriendClick: ((Friend) -> Unit)? = null
@@ -52,11 +47,7 @@ fun FriendCard(
     Card(
         modifier = Modifier
             .padding(bottom = 4.dp, start = 4.dp, end = 4.dp)
-            .then(
-                if (friend != null) Modifier.clickable { onFriendClick?.invoke(friend) }
-                else Modifier
-            )
-            .animateContentSize()
+            .clickable { onFriendClick?.invoke(friend) }
     ) {
         Row(
             modifier = Modifier
@@ -69,40 +60,16 @@ fun FriendCard(
                 modifier = Modifier.weight(1f),
                 contentAlignment = Alignment.CenterStart
             ) {
-                if (friend != null) {
-                    Text(text = friend.name, style = MaterialTheme.typography.titleLarge)
-                }
-                if (personIcon != null) {
-                    Icon(imageVector = personIcon, contentDescription = personIconDesc)
-                }
+                Text(text = friend.name, style = MaterialTheme.typography.titleLarge)
             }
-
             Box(
                 modifier = Modifier.weight(1f),
                 contentAlignment = Alignment.Center
             ) {
-                if (friend != null) {
-                    Text(text = "${friend.birthDay}/${friend.birthMonth}", style = MaterialTheme.typography.titleLarge)
-                }
-                if (cakeIcon != null) {
-                    Icon(painter = cakeIcon, contentDescription = cakeIconDesc)
-                }
+                Text(text = "${friend.birthDay}/${friend.birthMonth}", style = MaterialTheme.typography.titleLarge)
             }
 
-            Box(
-                modifier = Modifier.weight(0.5f),
-                contentAlignment = Alignment.CenterEnd
-            ) {
-                if (friend != null) {
-                    Button(
-                        onClick = {},
-                        modifier = Modifier,
-                        colors = ButtonDefaults.buttonColors(containerColor = Color.Transparent, contentColor = Color.Black)
-                    ) {
-                        Icon(imageVector = Icons.Default.MoreVert, contentDescription = "View options")
-                    }
-                }
-            }
+            Box(modifier = Modifier.weight(0.5f))
         }
     }
 }

@@ -1,5 +1,6 @@
 package com.example.bursdagsapp
 
+import androidx.compose.foundation.background
 import androidx.navigation.compose.composable
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.padding
@@ -13,6 +14,7 @@ import androidx.compose.material.icons.filled.List
 import androidx.compose.material.icons.filled.Person
 import androidx.compose.material.icons.filled.Settings
 import androidx.compose.material3.Icon
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.NavigationBar
 import androidx.compose.material3.NavigationBarDefaults
 import androidx.compose.material3.NavigationBarItem
@@ -25,6 +27,7 @@ import androidx.compose.runtime.mutableIntStateOf
 import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
@@ -126,14 +129,6 @@ fun BirthdayAppPreview() {
         Column(
             modifier = Modifier.Companion
         ) {
-            FriendCard(
-                personIcon = Icons.Default.Person,
-                personIconDesc = "Person",
-                cakeIcon = painterResource(R.drawable.cake),
-                cakeIconDesc = "Birthday cake",
-                padding = headerPadding,
-                onFriendClick = {}
-            )
             LazyColumn(
                 modifier = Modifier.Companion
             ) {
