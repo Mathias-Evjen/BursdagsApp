@@ -122,7 +122,8 @@ fun AddFriendScreen(
             singleLine = false,
             modifier = Modifier.fillMaxWidth(),
             keyboardOptions = KeyboardOptions.Default.copy(
-                imeAction = ImeAction.Done
+                imeAction = ImeAction.Done,
+                capitalization = KeyboardCapitalization.Sentences
             ),
             keyboardActions = KeyboardActions(
                 onDone = {
@@ -136,9 +137,6 @@ fun AddFriendScreen(
 
                         if (!uiState.isNameEmpty && !uiState.isPhoneNumberEmpty && !uiState.isBirthdayEmpty) navController.navigateUp() }
                     }
-            ),
-            keyboardOptions = KeyboardOptions(
-                capitalization = KeyboardCapitalization.Sentences
             )
         )
 
