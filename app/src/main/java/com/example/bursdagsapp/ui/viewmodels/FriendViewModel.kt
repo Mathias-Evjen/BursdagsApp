@@ -26,32 +26,36 @@ class FriendViewModel(private val repository: FriendRepository, application: App
     )
 
     fun addFriend(name: String, phoneNumber: String, birthday: Long, message: String) {
-
-        val calendar = Calendar.getInstance()
-        calendar.timeInMillis = birthday
-
-        val birthMonth = calendar.get(Calendar.MONTH) + 1
-        val birthDay = calendar.get(Calendar.DAY_OF_MONTH)
-
-        val friendToInsert = if (message != "") {
-            Friend(
-                name = name,
-                phoneNumber = phoneNumber,
-                birthMonth = birthMonth,
-                birthDay = birthDay,
-                message = message
-            )
-        } else {
-            Friend(
-                name = name,
-                phoneNumber = phoneNumber,
-                birthMonth = birthMonth,
-                birthDay = birthDay
-            )
-        }
+        val calendar = Calendar.getInstance().apply { timeInMillis = birthday }
 
         viewModelScope.launch {
-            repository.insert(friendToInsert)
+            repository.insert(
+                Friend(
+                    name = name,
+                    phoneNumber = phoneNumber,
+                    birthMonth = calendar.get(Calendar.MONTH) + 1,
+                    birthDay = calendar.get(Calendar.DAY_OF_MONTH),
+                    message = message.ifBlank { "Happy birthday!" }
+                )
+            )
+        }
+    }
+
+
+    fun updateFriend(id: Int, name: String, phoneNumber: String, birthday: Long, message: String) {
+        val calendar = Calendar.getInstance().apply { timeInMillis = birthday }
+
+        viewModelScope.launch {
+            repository.update(
+                Friend(
+                    id = id,
+                    name = name,
+                    phoneNumber = phoneNumber,
+                    birthDay = calendar.get(Calendar.MONTH) + 1,
+                    birthMonth = calendar.get(Calendar.DAY_OF_MONTH),
+                    message = message
+                )
+            )
         }
     }
 

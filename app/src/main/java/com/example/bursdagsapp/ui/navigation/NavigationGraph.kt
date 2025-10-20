@@ -13,6 +13,7 @@ import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import androidx.navigation.navArgument
 import com.example.bursdagsapp.ui.screens.AddFriendScreen
+import com.example.bursdagsapp.ui.screens.EditFriendScreen
 import com.example.bursdagsapp.ui.screens.FriendDetailScreen
 import com.example.bursdagsapp.ui.screens.ListScreen
 import com.example.bursdagsapp.ui.screens.PreferencesScreen
@@ -45,7 +46,22 @@ fun NavigationGraph(
             val friendId = backStackEntry.arguments?.getInt("friendId")
             val friend = friends.find { it.id == friendId }
             friend?.let {
-                FriendDetailScreen(it, viewModel, navController)
+                FriendDetailScreen(it, viewModel, navController,
+                    onEditClick = { friend ->
+                        navController.navigate("detail/edit/${friend.id}")
+                    })
+            }
+        }
+
+        composable(
+            route = "detail/edit/{friendId}",
+            arguments = listOf(navArgument("friendId") {type =
+                NavType.IntType})
+        ) { backStackEntry ->
+            val friendId = backStackEntry.arguments?.getInt("friendId")
+            val friend = friends.find {it.id == friendId}
+            friend?.let {
+                EditFriendScreen(it, viewModel, navController)
             }
         }
 

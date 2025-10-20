@@ -19,7 +19,8 @@ import com.example.bursdagsapp.ui.viewmodels.FriendViewModel
 fun FriendDetailScreen(
     friend: Friend,
     viewModel: FriendViewModel,
-    navController: NavHostController
+    navController: NavHostController,
+    onEditClick: (Friend) -> Unit
 ) {
     Column(
         Modifier.fillMaxSize().padding(16.dp),
@@ -32,7 +33,7 @@ fun FriendDetailScreen(
         Text("Birthday message: ${friend.message}")
 
         Button(
-            onClick = {}
+            onClick = { onEditClick(friend) }
         ){
             Text("Edit")
         }
