@@ -5,8 +5,8 @@ import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
@@ -18,10 +18,6 @@ import androidx.compose.material.icons.filled.Search
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
-import androidx.compose.material3.OutlinedTextField
-import androidx.compose.material3.Scaffold
-import androidx.compose.material3.SearchBar
-import androidx.compose.material3.SearchBarDefaults
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextField
 import androidx.compose.material3.TextFieldDefaults
@@ -29,26 +25,25 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
-import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
-import androidx.compose.ui.semantics.semantics
-import androidx.compose.ui.semantics.traversalIndex
 import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.unit.dp
-import androidx.room.util.query
+import androidx.navigation.NavHostController
 import com.example.bursdagsapp.R
 import com.example.bursdagsapp.data.Friend
 import com.example.bursdagsapp.ui.components.FriendCard
+import com.example.bursdagsapp.ui.viewmodels.FriendViewModel
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun ListScreen(
     friends: List<Friend>,
-    onFriendClick: (Friend) -> Unit
+    navController: NavHostController,
+    viewModel: FriendViewModel
 ) {
     val listItemPadding = 16
 
@@ -63,13 +58,17 @@ fun ListScreen(
     }
     Column(
         modifier = Modifier
+            .fillMaxSize()
+            .background(color = MaterialTheme.colorScheme.background),
     ) {
-        ListTopBanner()
+//        ListTopBanner()
 
         TextField(
             value = searchText,
             onValueChange = { searchText = it },
-            modifier = Modifier.fillMaxWidth().padding(4.dp),
+            modifier = Modifier
+                .fillMaxWidth()
+                .padding(6.dp),
             shape = RoundedCornerShape(32.dp),
             placeholder = { Text("Search for a friend") },
             leadingIcon = {
@@ -83,14 +82,14 @@ fun ListScreen(
             singleLine = true,
             keyboardOptions = KeyboardOptions.Default.copy(
                 imeAction = ImeAction.Done
-            ),
+            )
         )
 
         LazyColumn(
             modifier = Modifier
         ) {
             items(filteredFriends) { friend ->
-                FriendCard(friend = friend, padding = listItemPadding, onFriendClick = { onFriendClick(friend) })
+                FriendCard(friend = friend, padding = listItemPadding, navController = navController, viewModel = viewModel)
             }
         }
     }
@@ -101,7 +100,7 @@ fun ListTopBanner() {
     Box(
         modifier = Modifier
             .fillMaxWidth()
-            .background(color = MaterialTheme.colorScheme.primary)
+            .background(color = Color.Black)
     ) {
         Row(
             modifier = Modifier

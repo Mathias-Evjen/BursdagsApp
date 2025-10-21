@@ -1,10 +1,7 @@
 package com.example.bursdagsapp
 
-import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
-import androidx.compose.foundation.lazy.LazyColumn
-import androidx.compose.foundation.lazy.items
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.filled.List
 import androidx.compose.material.icons.filled.Add
@@ -21,17 +18,14 @@ import androidx.compose.runtime.mutableIntStateOf
 import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.vector.ImageVector
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavGraph.Companion.findStartDestination
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
-import com.example.bursdagsapp.data.Friend
-import com.example.bursdagsapp.ui.components.FriendCard
 import com.example.bursdagsapp.ui.navigation.NavigationGraph
-import com.example.bursdagsapp.ui.theme.BursdagsAppTheme
 import com.example.bursdagsapp.ui.viewmodels.FriendViewModel
 
 
@@ -59,7 +53,7 @@ fun BottomNavigationBar(navController: NavHostController) {
     val navBackStackEntry by navController.currentBackStackEntryAsState()
     val currentRoute = navBackStackEntry?.destination?.route
 
-    NavigationBar(windowInsets = NavigationBarDefaults.windowInsets) {
+    NavigationBar(windowInsets = NavigationBarDefaults.windowInsets, containerColor = Color.Black) {
         Destination.entries.forEachIndexed { index, destination ->
             NavigationBarItem(
                 selected = currentRoute == destination.route,

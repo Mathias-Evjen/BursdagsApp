@@ -17,9 +17,10 @@ import androidx.compose.ui.platform.LocalView
 import androidx.core.view.WindowCompat
 
 private val DarkColorScheme = darkColorScheme(
-    primary = Purple80,
-    secondary = PurpleGrey80,
-    tertiary = Pink80
+    primary = FriendCardGray,
+    secondary = SearchBarGray,
+    tertiary = FriendCardExpansionGray,
+    background = BackgroundGray,
 )
 
 private val LightColorScheme = lightColorScheme(
@@ -39,7 +40,7 @@ private val LightColorScheme = lightColorScheme(
 
 @Composable
 fun BursdagsAppTheme(
-    darkTheme: Boolean = isSystemInDarkTheme(),
+    darkTheme: Boolean = true,
     // Dynamic color is available on Android 12+
     dynamicColor: Boolean = false,
     content: @Composable () -> Unit
@@ -58,7 +59,7 @@ fun BursdagsAppTheme(
     if (!view.isInEditMode) {
         SideEffect {
             val window = (view.context as Activity).window
-            window.statusBarColor = colorScheme.primary.toArgb()
+            window.statusBarColor = Color.Black.toArgb()
 
             WindowCompat.getInsetsController(window, view).isAppearanceLightStatusBars = false
         }
