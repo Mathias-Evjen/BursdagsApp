@@ -5,6 +5,7 @@ import android.app.Application
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.bursdagsapp.data.Friend
+import com.example.bursdagsapp.data.PreferenceManager
 import com.example.bursdagsapp.repositories.FriendRepository
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.SharingStarted
@@ -18,6 +19,8 @@ import java.util.Calendar
 class FriendViewModel(private val repository: FriendRepository, application: Application) : AndroidViewModel(application) {
 
     private val _uiState = MutableStateFlow(AddFriendUiState())
+    private val preferenceManager = PreferenceManager(application.applicationContext)
+
     val uiState: StateFlow<AddFriendUiState> = _uiState.asStateFlow()
 
     val friends: StateFlow<List<Friend>> = repository.allFriends.stateIn(
@@ -28,6 +31,8 @@ class FriendViewModel(private val repository: FriendRepository, application: App
     fun addFriend(name: String, phoneNumber: String, birthday: Long, message: String) {
         val calendar = Calendar.getInstance().apply { timeInMillis = birthday }
 
+        val defaultMessage = preferenceManager.getDefaultMessage()
+
         viewModelScope.launch {
             repository.insert(
                 Friend(
@@ -35,7 +40,7 @@ class FriendViewModel(private val repository: FriendRepository, application: App
                     phoneNumber = phoneNumber,
                     birthMonth = calendar.get(Calendar.MONTH) + 1,
                     birthDay = calendar.get(Calendar.DAY_OF_MONTH),
-                    message = message.ifBlank { "Happy birthday!" }
+                    message = message.ifBlank { defaultMessage }
                 )
             )
         }

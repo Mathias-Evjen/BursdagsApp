@@ -9,15 +9,20 @@ import androidx.activity.result.contract.ActivityResultContracts
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Check
 import androidx.compose.material.icons.filled.Clear
+import androidx.compose.material3.Button
 import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.Switch
 import androidx.compose.material3.SwitchDefaults
 import androidx.compose.material3.Text
@@ -30,10 +35,12 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.text.input.KeyboardCapitalization
 import androidx.compose.ui.unit.dp
 import androidx.core.content.ContextCompat
 import androidx.lifecycle.viewmodel.compose.viewModel
 import com.example.bursdagsapp.MyApp
+import com.example.bursdagsapp.data.PreferenceManager
 import com.example.bursdagsapp.ui.viewmodels.MyViewModel
 
 @Composable
@@ -64,10 +71,14 @@ fun PreferencesScreen(
         }
     }
 
+    val preferenceManager = remember { PreferenceManager(context) }
+    var defaultMessage by remember { mutableStateOf(preferenceManager.getDefaultMessage()) }
+
+
     Column(
         modifier = Modifier
             .fillMaxSize()
-            .padding(),
+            .padding(32.dp),
         verticalArrangement = Arrangement.Center,
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
@@ -113,6 +124,24 @@ fun PreferencesScreen(
                     }
                 }
             )
+        }
+
+        Spacer(modifier = Modifier.height(32.dp))
+
+        Text(text = "Default birthday message:")
+        OutlinedTextField(
+            value = defaultMessage,
+            onValueChange = { defaultMessage = it },
+            singleLine = false,
+            modifier = Modifier.fillMaxWidth(),
+            keyboardOptions = KeyboardOptions(
+                capitalization = KeyboardCapitalization.Sentences
+            )
+        )
+        Button(
+            onClick = { preferenceManager.setDefaultMessage(defaultMessage) }
+        ) {
+            Text("Save")
         }
     }
 }

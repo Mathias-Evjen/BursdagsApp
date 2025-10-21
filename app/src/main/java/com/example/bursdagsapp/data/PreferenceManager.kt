@@ -10,6 +10,7 @@ class PreferenceManager(context: Context) {
 
     companion object {
         const val KEY_SMS_ENABLED = "sms_enabled"
+        const val KEY_DEFAULT_MESSAGE = "default_message"
     }
 
     fun isSmsEnabled(): Boolean {
@@ -18,5 +19,13 @@ class PreferenceManager(context: Context) {
 
     fun setSmsEnabled(isEnabled: Boolean) {
         sharedPreferences.edit { putBoolean(KEY_SMS_ENABLED, isEnabled) }
+    }
+
+    fun getDefaultMessage(): String {
+        return sharedPreferences.getString(KEY_DEFAULT_MESSAGE, "Happy birthday!").toString()
+    }
+
+    fun setDefaultMessage(message: String) {
+        sharedPreferences.edit { putString(KEY_DEFAULT_MESSAGE, message) }
     }
 }
