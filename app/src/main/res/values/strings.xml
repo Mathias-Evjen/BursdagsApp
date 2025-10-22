@@ -1,3 +1,33 @@
 <resources>
     <string name="app_name">BursdagsApp</string>
+
+    <!-- Friend card-->
+    <string name="dropdown_edit">Edit</string>
+    <string name="dropdown_delete">Delete</string>
+    <string name="popup_confirm">Confirm</string>
+    <string name="popup_cancel">Cancel</string>
+    <string name="popup_title">Delete?</string>
+    <string name="popup_text">Do you wish to delete %1$s?</string>
+
+    <!-- List screen -->
+    <string name="textfield_placeholder">Search for a friend</string>
+
+    <!-- Add friend screen and edit friend screen -->
+    <string name="name_label">Name</string>
+    <string name="phoneNumber_label">Phone number</string>
+    <string name="datePicker_empty">Select a date</string>
+    <string name="birthday_label">Birthday</string>
+    <string name="birthayMessage_label">Birthday message</string>
+    <string name="save_friend">Save friend</string>
+    <string name="datePicker_confirm">OK</string>
+    <string name="datePicker_dismiss">Cancel</string>
+
+    <!-- Preferences screen -->
+    <string name="preferences_title">Preferences</string>
+    <string name="switch_label">Allow app to send SMS:</string>
+    <string name="snackbar_sms_enabled">SMS service enabled</string>
+    <string name="snackbar_sms_disabled">SMS service disabled</string>
+    <string name="default_message_label">Default birthday message:</string>
+    <string name="snackbar_default_message_saved">Default message saved!</string>
+    <string name="save">Save</string>
 </resources>

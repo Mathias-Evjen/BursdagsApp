@@ -30,6 +30,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavHostController
@@ -70,7 +71,7 @@ fun ListScreen(
                 .fillMaxWidth()
                 .padding(6.dp),
             shape = RoundedCornerShape(32.dp),
-            placeholder = { Text("Search for a friend") },
+            placeholder = { Text(stringResource(R.string.textfield_placeholder)) },
             leadingIcon = {
                 Icon(Icons.Default.Search, contentDescription = "Search Icon")
             },

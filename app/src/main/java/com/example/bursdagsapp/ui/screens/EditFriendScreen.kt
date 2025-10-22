@@ -1,5 +1,6 @@
 package com.example.bursdagsapp.ui.screens
 
+import com.example.bursdagsapp.R
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
@@ -30,6 +31,7 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.text.input.KeyboardCapitalization
 import androidx.compose.ui.unit.dp
@@ -93,7 +95,7 @@ fun EditFriendScreen(
         OutlinedTextField(
             value = name,
             onValueChange = { name = it },
-            label = { Text("Name") },
+            label = { Text(stringResource(R.string.name_label)) },
             singleLine = true,
             modifier = Modifier.fillMaxWidth(),
             keyboardOptions = KeyboardOptions(
@@ -104,7 +106,7 @@ fun EditFriendScreen(
         OutlinedTextField(
             value = phoneNumber,
             onValueChange = { phoneNumber = it},
-            label = { Text("Phone number") },
+            label = { Text(stringResource(R.string.phoneNumber_label)) },
             singleLine = true,
             modifier = Modifier.fillMaxWidth(),
             keyboardOptions = KeyboardOptions(
@@ -117,10 +119,10 @@ fun EditFriendScreen(
                 value = datePickerState.selectedDateMillis?.let { millis ->
                     // Use the millisecond Long value directly here
                     SimpleDateFormat("dd MMMM", Locale.getDefault()).format(Date(millis))
-                } ?: "Select a date",
+                } ?: stringResource(R.string.datePicker_empty),
                 onValueChange = {},
                 readOnly = true,
-                label = { Text("Birthday") },
+                label = { Text(stringResource(R.string.birthday_label)) },
                 trailingIcon = {
                     Icon(Icons.Default.DateRange, contentDescription = "Select date")
                 },
@@ -137,7 +139,7 @@ fun EditFriendScreen(
         OutlinedTextField(
             value = birthdayMessage,
             onValueChange = { birthdayMessage = it },
-            label = { Text("Birthday message")},
+            label = { Text(stringResource(R.string.birthayMessage_label))},
             singleLine = false,
             modifier = Modifier.fillMaxWidth(),
             keyboardOptions = KeyboardOptions.Default.copy(
@@ -184,7 +186,7 @@ fun EditFriendScreen(
                 disabledContentColor = Color.Gray,
                 disabledContainerColor = Color.DarkGray)
         ) {
-            Text("Save")
+            Text(stringResource(R.string.save))
         }
     }
 
@@ -193,12 +195,12 @@ fun EditFriendScreen(
             onDismissRequest = { showDatePicker = false },
             confirmButton = {
                 Button(onClick = { showDatePicker = false }) {
-                    Text("OK")
+                    Text(stringResource(R.string.datePicker_confirm))
                 }
             },
             dismissButton = {
                 Button(onClick = { showDatePicker = false }) {
-                    Text("Cancel")
+                    Text(stringResource(R.string.datePicker_dismiss))
                 }
             }
         ) {

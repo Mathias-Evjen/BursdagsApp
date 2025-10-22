@@ -1,5 +1,6 @@
 package com.example.bursdagsapp.ui.screens
 
+import com.example.bursdagsapp.R
 import android.Manifest
 import android.content.pm.PackageManager
 import android.util.Log
@@ -40,6 +41,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.scale
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.input.KeyboardCapitalization
 import androidx.compose.ui.unit.dp
 import androidx.core.content.ContextCompat
@@ -82,6 +84,10 @@ fun PreferencesScreen(
     val preferenceManager = remember { PreferenceManager(context) }
     var defaultMessage by remember { mutableStateOf(preferenceManager.getDefaultMessage()) }
 
+    val smsEnabledMessage = stringResource(R.string.snackbar_sms_enabled)
+    val smsDisabledMessage = stringResource(R.string.snackbar_sms_disabled)
+    val defaultMessageSaved = stringResource(R.string.snackbar_default_message_saved)
+
     Scaffold(
         snackbarHost = { SnackbarHost(hostState = snackBareHostState) }
     ) { innerPadding ->
@@ -93,10 +99,10 @@ fun PreferencesScreen(
             verticalArrangement = Arrangement.Center,
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
-            Text(text = "Preferences", style = MaterialTheme.typography.displayLarge, modifier = Modifier.padding(bottom = 16.dp))
+            Text(text = stringResource(R.string.preferences_title), style = MaterialTheme.typography.displayLarge, modifier = Modifier.padding(bottom = 16.dp))
 
 
-            Text(text = "Allow app to send SMS: ", style = MaterialTheme.typography.titleLarge)
+            Text(text = stringResource(R.string.switch_label), style = MaterialTheme.typography.titleLarge)
 
             Switch(
                 modifier = Modifier.scale(1.2f),
@@ -105,13 +111,13 @@ fun PreferencesScreen(
                     if (desiredState) {
                         if (hasSmsPermission) {
                             myViewModel.start()
-                            scope.launch { snackBareHostState.showSnackbar("SMS service enabled") }
+                            scope.launch { snackBareHostState.showSnackbar(smsEnabledMessage) }
                         } else {
                             permissionLauncher.launch(Manifest.permission.SEND_SMS)
                         }
                     } else {
                         myViewModel.stop()
-                        scope.launch { snackBareHostState.showSnackbar("SMS service disabled") }
+                        scope.launch { snackBareHostState.showSnackbar(smsDisabledMessage) }
                     }
                 },
                 thumbContent = if (isSwitchEnabled) {
@@ -157,12 +163,12 @@ fun PreferencesScreen(
                 onClick = {
                     preferenceManager.setDefaultMessage(defaultMessage)
                     scope.launch {
-                        snackBareHostState.showSnackbar("Default message saved!")
+                        snackBareHostState.showSnackbar(defaultMessageSaved)
                     }
                 },
                 colors = ButtonColors(containerColor = MaterialTheme.colorScheme.primary, contentColor = Color.White, disabledContentColor = Color.Gray, disabledContainerColor = Color.DarkGray)
             ) {
-                Text("Save")
+                Text(stringResource(R.string.save))
             }
         }
     }

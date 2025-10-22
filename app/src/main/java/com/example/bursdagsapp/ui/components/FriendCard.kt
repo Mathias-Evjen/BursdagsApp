@@ -33,6 +33,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavHostController
 import com.example.bursdagsapp.R
@@ -109,14 +110,14 @@ fun FriendCard(
                         shape = RoundedCornerShape(16.dp)
                     ) {
                         DropdownMenuItem(
-                            text = { Text("Edit") },
+                            text = { Text(stringResource(R.string.dropdown_edit)) },
                             onClick = {
                                 navController.navigate("edit/${friend.id}")
                                 isMenuExpanded = false
                             }
                         )
                         DropdownMenuItem(
-                            text = { Text("Delete") },
+                            text = { Text(stringResource(R.string.dropdown_delete)) },
                             onClick = {
                                 showDeletePopup = true
                                 isMenuExpanded = false
@@ -154,21 +155,21 @@ fun FriendCard(
                         showDeletePopup = false
                     }
                 ) {
-                    Text("Confirm", color = Color.Red)
+                    Text(stringResource(R.string.popup_confirm), color = Color.Red)
                 }
             },
             dismissButton = {
                 TextButton(
                     onClick = { showDeletePopup = false },
                 ) {
-                    Text("Cancel", color = Color.LightGray)
+                    Text(stringResource(R.string.popup_cancel), color = Color.LightGray)
                 }
             },
             title = {
-                Text("Delete?")
+                Text(stringResource(R.string.popup_title))
             },
             text = {
-                Text("Do you wish to delete ${friend.name}?")
+                Text(stringResource(R.string.popup_text, friend.name))
             }
         )
     }
