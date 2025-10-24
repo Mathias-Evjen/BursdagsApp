@@ -2,34 +2,40 @@
     <string name="app_name">BursdagsApp</string>
 
     <!-- Friend card-->
-    <string name="dropdown_edit">Edit</string>
-    <string name="dropdown_delete">Delete</string>
-    <string name="popup_confirm">Confirm</string>
-    <string name="popup_cancel">Cancel</string>
-    <string name="popup_title">Delete?</string>
-    <string name="popup_text">Do you wish to delete %1$s?</string>
+    <string name="dropdown_edit">Rediger</string>
+    <string name="dropdown_delete">Slett</string>
+    <string name="popup_confirm">Bekreft</string>
+    <string name="popup_cancel">Avbryt</string>
+    <string name="popup_title">Slette?</string>
+    <string name="popup_text">Ønsker du å slette %1$s?</string>
+    <string name="extended_details">Dealjer: </string>
+    <string name="extended_telefon">Telefonnummer: %1$s</string>
+    <string name="extended_message">Melding: %1$s</string>
 
     <!-- List screen -->
-    <string name="textfield_placeholder">Search for a friend</string>
+    <string name="textfield_placeholder">Søk etter en venn</string>
 
     <!-- Add friend screen and edit friend screen -->
-    <string name="name_label">Name</string>
-    <string name="phoneNumber_label">Phone number</string>
-    <string name="datePicker_empty">Select a date</string>
-    <string name="birthday_label">Birthday</string>
-    <string name="birthayMessage_label">Birthday message</string>
-    <string name="save_friend">Save friend</string>
+    <string name="add_friend_title">Legg til ny venn</string>
+    <string name="edit_friend_title">Rediger venn</string>
+    <string name="name_label">Navn</string>
+    <string name="phoneNumber_label">Telefonnummer</string>
+    <string name="datePicker_empty">Velg en dato</string>
+    <string name="birthday_label">Bursdag</string>
+    <string name="birthayMessage_label">Bursdagsmelding (blank for standard)</string>
+    <string name="save_friend">Lagre venn</string>
     <string name="datePicker_confirm">OK</string>
-    <string name="datePicker_dismiss">Cancel</string>
+    <string name="datePicker_dismiss">Avbryt</string>
 
     <!-- Preferences screen -->
-    <string name="preferences_title">Preferences</string>
-    <string name="switch_label">Allow app to send SMS:</string>
-    <string name="snackbar_sms_enabled">SMS service enabled</string>
-    <string name="snackbar_sms_disabled">SMS service disabled</string>
-    <string name="default_message_label">Default birthday message:</string>
-    <string name="snackbar_default_message_saved">Default message saved!</string>
-    <string name="save">Save</string>
+    <string name="preferences_title">Preferanser</string>
+    <string name="switch_label">Tillat appen å sende SMS:</string>
+    <string name="message_label">Standard bursdagsmelding:</string>
+    <string name="snackbar_sms_enabled">SMS service på</string>
+    <string name="snackbar_sms_disabled">SMS service av</string>
+    <string name="default_message_label">Standard bursdagsmelding:</string>
+    <string name="snackbar_default_message_saved">Standard melding lagret!</string>
+    <string name="save">Lagre</string>
 
     <!-- Icons -->
     <string name="back_arrow_icon">Back arrow</string>

@@ -22,7 +22,7 @@ class PreferenceManager(context: Context) {
     }
 
     fun getDefaultMessage(): String {
-        return sharedPreferences.getString(KEY_DEFAULT_MESSAGE, "Happy birthday!").toString()
+        return sharedPreferences.getString(KEY_DEFAULT_MESSAGE, "Gratulerer med dagen!").toString()
     }
 
     fun setDefaultMessage(message: String) {

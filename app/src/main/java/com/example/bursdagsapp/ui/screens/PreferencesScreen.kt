@@ -149,7 +149,7 @@ fun PreferencesScreen(
 
             Spacer(modifier = Modifier.height(32.dp))
 
-            Text(text = "Default birthday message:", style = MaterialTheme.typography.titleLarge)
+            Text(stringResource(R.string.message_label), style = MaterialTheme.typography.titleLarge)
             OutlinedTextField(
                 value = defaultMessage,
                 onValueChange = { defaultMessage = it },

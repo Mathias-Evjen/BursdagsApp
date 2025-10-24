@@ -136,9 +136,9 @@ fun FriendCard(
                         .fillMaxWidth()
                         .padding(start = 16.dp, end = 16.dp, bottom = 16.dp, top = 8.dp)
                 ) {
-                    Text("Details:", style = MaterialTheme.typography.titleMedium)
-                    Text("Phone: ${friend.phoneNumber}")
-                    Text("Message: \"${friend.message}\"")
+                    Text(stringResource(R.string.extended_details), style = MaterialTheme.typography.titleMedium)
+                    Text(stringResource(R.string.extended_telefon, friend.phoneNumber))
+                    if (friend.message != null) Text(stringResource(R.string.extended_message, friend.message))
                 }
             }
         }

@@ -92,7 +92,7 @@ enum class Destination(
     val icon: ImageVector,
     val contentDestination: String
 ) {
-    LIST("list", "Friends", Icons.AutoMirrored.Filled.List, "List of friends"),
-    ADD_FRIEND("add_friend", "Add friend", Icons.Default.Add, "Add friend"),
-    PREFERENCES("prefs", "Preferences", Icons.Default.Settings, "Preferences")
+    LIST("list", "Venner", Icons.AutoMirrored.Filled.List, "List of friends"),
+    ADD_FRIEND("add_friend", "Ny venn", Icons.Default.Add, "Add friend"),
+    PREFERENCES("prefs", "Preferanser", Icons.Default.Settings, "Preferences")
 }
