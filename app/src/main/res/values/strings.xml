@@ -30,4 +30,12 @@
     <string name="default_message_label">Default birthday message:</string>
     <string name="snackbar_default_message_saved">Default message saved!</string>
     <string name="save">Save</string>
+
+    <!-- Icons -->
+    <string name="back_arrow_icon">Back arrow</string>
+    <string name="date_range_icon">Select date</string>
+    <string name="search_icon">Search icon</string>
+    <string name="person_icon">Person icon</string>
+    <string name="cake_icon">Birthday cake</string>
+    <string name="more_options_icon">More options</string>
 </resources>

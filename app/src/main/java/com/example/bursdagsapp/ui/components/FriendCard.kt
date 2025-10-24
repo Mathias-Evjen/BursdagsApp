@@ -77,7 +77,7 @@ fun FriendCard(
                 ) {
                     Row {
                         Icon(Icons.Default.Person,
-                            contentDescription = "Person icon",
+                            contentDescription = stringResource(R.string.person_icon),
                             modifier = Modifier.padding(end = 16.dp),)
                         Text(text = friend.name, style = MaterialTheme.typography.titleLarge)
                     }
@@ -88,7 +88,7 @@ fun FriendCard(
                 ) {
                     Row {
                         Icon(painter = painterResource(R.drawable.cake),
-                            contentDescription = "Birthday cake",
+                            contentDescription = stringResource(R.string.cake_icon),
                             modifier = Modifier.padding(end = 16.dp))
                         Text(text = "${friend.birthDay}/${friend.birthMonth}", style = MaterialTheme.typography.titleLarge)
                     }
@@ -102,7 +102,7 @@ fun FriendCard(
                         onClick = { isMenuExpanded = true },
                         colors = ButtonColors(containerColor = Color.Transparent, contentColor = Color.White, disabledContentColor = Color.Gray, disabledContainerColor = Color.Gray)
                     ) {
-                        Icon(Icons.Default.MoreVert, contentDescription = null)
+                        Icon(Icons.Default.MoreVert, contentDescription = stringResource(R.string.more_options_icon))
                     }
                     DropdownMenu(
                         expanded = isMenuExpanded,

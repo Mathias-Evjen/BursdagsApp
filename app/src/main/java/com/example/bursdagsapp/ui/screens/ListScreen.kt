@@ -62,8 +62,6 @@ fun ListScreen(
             .fillMaxSize()
             .background(color = MaterialTheme.colorScheme.background),
     ) {
-//        ListTopBanner()
-
         TextField(
             value = searchText,
             onValueChange = { searchText = it },
@@ -73,7 +71,7 @@ fun ListScreen(
             shape = RoundedCornerShape(32.dp),
             placeholder = { Text(stringResource(R.string.textfield_placeholder)) },
             leadingIcon = {
-                Icon(Icons.Default.Search, contentDescription = "Search Icon")
+                Icon(Icons.Default.Search, contentDescription = stringResource(R.string.search_icon))
             },
             colors = TextFieldDefaults.colors(
                 focusedIndicatorColor = Color.Transparent,
@@ -93,40 +91,5 @@ fun ListScreen(
                 FriendCard(friend = friend, padding = listItemPadding, navController = navController, viewModel = viewModel)
             }
         }
-    }
-}
-
-@Composable
-fun ListTopBanner() {
-    Box(
-        modifier = Modifier
-            .fillMaxWidth()
-            .background(color = Color.Black)
-    ) {
-        Row(
-            modifier = Modifier
-                .fillMaxWidth()
-                .padding(16.dp),
-            horizontalArrangement = Arrangement.SpaceBetween,
-            verticalAlignment = Alignment.CenterVertically
-        ) {
-            Box(
-                modifier = Modifier.weight(1f),
-                contentAlignment = Alignment.CenterStart
-            ) {
-                Icon(Icons.Default.Person,
-                    contentDescription = "Person icon")
-            }
-            Box(
-                modifier = Modifier.weight(1f),
-                contentAlignment = Alignment.Center
-            ) {
-                Icon(painter = painterResource(R.drawable.cake),
-                    contentDescription = "Birthday cake")
-            }
-
-            Box(modifier = Modifier.weight(0.5f))
-        }
-
     }
 }

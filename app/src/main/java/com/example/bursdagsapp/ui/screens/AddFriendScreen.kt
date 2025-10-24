@@ -47,31 +47,23 @@ fun AddFriendScreen(
     viewModel: FriendViewModel,
     navController: NavHostController
 ) {
-
-    val uiState by viewModel.uiState.collectAsState()
-
     var name by remember { mutableStateOf("") }
-    var isNameEmpty by remember { mutableStateOf(false) }
-
     var phoneNumber by remember { mutableStateOf("") }
-    var isPhoneNumberEmpty by remember { mutableStateOf(false) }
-
     var birthdayMessage by remember { mutableStateOf("") }
 
     var showDatePicker by remember { mutableStateOf(false) }
 
     val datePickerState = rememberDatePickerState()
     val selectedDate = datePickerState.selectedDateMillis
-    var isSelectedDateEmpty by remember { mutableStateOf(false) }
 
     Column(
         modifier = Modifier
             .fillMaxSize()
-            .padding(16.dp),
+            .padding(32.dp),
         verticalArrangement = Arrangement.spacedBy(16.dp, Alignment.CenterVertically),
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
-        Text(text = "Add new friend", style = MaterialTheme.typography.displayLarge)
+        Text(text = "Add new friend", style = MaterialTheme.typography.displayMedium)
 
         OutlinedTextField(
             value = name,
@@ -106,7 +98,7 @@ fun AddFriendScreen(
                 readOnly = true,
                 label = { Text(stringResource(R.string.birthday_label)) },
                 trailingIcon = {
-                    Icon(Icons.Default.DateRange, contentDescription = "Select date")
+                    Icon(Icons.Default.DateRange, contentDescription = stringResource(R.string.date_range_icon))
                 },
                 modifier = Modifier
                     .fillMaxWidth()
@@ -139,8 +131,9 @@ fun AddFriendScreen(
                             message = birthdayMessage
                         )
 
-                        if (!uiState.isNameEmpty && !uiState.isPhoneNumberEmpty && !uiState.isBirthdayEmpty) navController.navigateUp() }
+                        navController.navigateUp()
                     }
+                }
             )
         )
 
@@ -153,7 +146,7 @@ fun AddFriendScreen(
                     message = birthdayMessage
                 )
 
-                if (!uiState.isNameEmpty && !uiState.isPhoneNumberEmpty && !uiState.isBirthdayEmpty) navController.navigateUp()
+                navController.navigateUp()
             },
             enabled = name.isNotBlank() && phoneNumber.isNotBlank() && selectedDate != null,
             modifier = Modifier.fillMaxWidth(),

@@ -1,6 +1,5 @@
 package com.example.bursdagsapp.ui.viewmodels
 
-import AddFriendUiState
 import android.app.Application
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.viewModelScope
@@ -18,10 +17,7 @@ import java.util.Calendar
 
 class FriendViewModel(private val repository: FriendRepository, application: Application) : AndroidViewModel(application) {
 
-    private val _uiState = MutableStateFlow(AddFriendUiState())
     private val preferenceManager = PreferenceManager(application.applicationContext)
-
-    val uiState: StateFlow<AddFriendUiState> = _uiState.asStateFlow()
 
     val friends: StateFlow<List<Friend>> = repository.allFriends.stateIn(
         viewModelScope,
@@ -68,32 +64,5 @@ class FriendViewModel(private val repository: FriendRepository, application: App
         viewModelScope.launch {
             repository.delete(friendToDelete)
         }
-    }
-
-    // Will probably not be used
-    // TODO: Delete later
-    fun checkIfInputsEmpty(name: String, phoneNumber: String, birthday: Long?): Boolean {
-        var emptyInputs = false
-
-        if (name == "") {
-            emptyInputs = true
-            _uiState.update { currentState ->
-                currentState.copy(isNameEmpty = true)
-            }
-        }
-        if (phoneNumber == ""){
-            emptyInputs = true
-            _uiState.update { currentState ->
-                currentState.copy(isPhoneNumberEmpty = true)
-            }
-        }
-        if (birthday == null) {
-            emptyInputs = true
-            _uiState.update { currentState ->
-                currentState.copy(isBirthdayEmpty = true)
-            }
-        }
-
-        return emptyInputs
     }
 }

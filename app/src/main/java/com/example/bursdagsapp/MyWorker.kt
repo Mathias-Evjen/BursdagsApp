@@ -22,17 +22,9 @@ class MyWorker(val context: Context, workerParams: WorkerParameters) : Coroutine
 
         val repository = FriendRepository(MyApp.database.friendDao())
 
-        val friendsTest = repository.allFriends.first()
-
-        for (friend in friendsTest) {
-            Log.d("Friend", "${friend.name}, ${friend.birthDay}/${friend.birthMonth}, ${friend.message}")
-        }
-
         val friends = repository.allFriends.first().filter { friend ->
             friend.birthDay == currentDay && friend.birthMonth == currentMonth
         }
-
-        Log.d("Calendar", "Current date: ${currentDay}/${currentMonth}")
         Log.d("Repository", "Number of friends with birthday today: ${friends.size}")
 
         for (friend in friends) {
