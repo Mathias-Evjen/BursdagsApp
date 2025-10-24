@@ -29,14 +29,13 @@ class MyWorker(val context: Context, workerParams: WorkerParameters) : Coroutine
 
         for (friend in friends) {
             try {
-                // Get the default instance of SmsManager. [3, 8]
                 val smsManager: SmsManager = context.getSystemService(SmsManager::class.java)
-                // Send the text message. [7, 4]
+
+                // For å teste SMS med emulator, bytt friend.phoneNumber med "5554"
                 smsManager.sendTextMessage(friend.phoneNumber, null, friend.message, null, null)
                 Log.d("MyWorker", "SMS sent successfully to ${friend.phoneNumber}.")
             } catch (e: Exception) {
                 Log.e("MyWorker", "Failed to send SMS.", e)
-                // If it fails, you might want to retry the work
                 return Result.retry()
             }
         }
